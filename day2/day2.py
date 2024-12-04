@@ -9,7 +9,6 @@ with open(input_file_path, 'r') as file:
 def analyse_reports(problem_dampener):
     # Analyse each reports
     safe_reports = 0
-    ascending = False
     for report in lines:
         # Split the report
         levels = [int(level) for level in report.strip().split()]
@@ -27,7 +26,7 @@ def analyse_reports(problem_dampener):
     return safe_reports
 
 def analyse_levels(report):
-    print("Considering report: ", report)
+    #print("Considering report: ", report)
     rule_break = False
     safe = True
     ascending = report[0][1] > report[0][0]
@@ -50,8 +49,9 @@ def analyse_levels(report):
                 return analyse_levels(report)
             else:
                 safe = False
+                #print("Broke rule:", report)
                 break
-    print("--> Deemed", "Safe" if safe else "Unsafe")
+    #print("--> Deemed", "Safe" if safe else "Unsafe")
     return safe
 
 # Print the result for part 1
