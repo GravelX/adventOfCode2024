@@ -41,7 +41,6 @@ def main():
     invalid_mids = 0 # Part 2 counter
     for update in updates:
         # Verify if the update is valid
-        valid = True
         if check_update(update):
             # If valid, increment the counter with the center element
             valid_mids += update[len(update)//2]
