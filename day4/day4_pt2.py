@@ -1,5 +1,6 @@
 import os
 import numpy as np
+# Ouaip finalement je vais utiliser numpy... xD
 
 directory = os.path.dirname(os.path.realpath(__file__))
 input_file_path = os.path.join(directory, 'input.txt')
