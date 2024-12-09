@@ -166,7 +166,7 @@ def run_simulation(grid):
             frames.append(frame)
     return np.count_nonzero(grid == 5), frames
 
-def update_frame(i, im, los_framos, max):
+def update_frame(i, im, los_framos):
     F = los_framos[i]
     im.set_array(F)
     return im,
@@ -177,15 +177,14 @@ def main():
     path_length, los_framos = run_simulation(grid)
 
     if animation:
-        # Visualize the path
+        # Visualize the path taken by the guard.
         print("Animating",len(los_framos),"frames.")
         fig = plt.figure()
         im = plt.imshow(los_framos[0], animated=True)
         ani = anim.FuncAnimation(fig,
                                  partial(update_frame,
                                          im=im,
-                                         los_framos=los_framos,
-                                         max=len(los_framos)),
+                                         los_framos=los_framos),
                                  blit=True,
                                  repeat=False,
                                  interval=1,
@@ -197,5 +196,6 @@ def main():
 main()
 
 # DEV NOTES:
-# If I were to refactor, I would animate on the first run without saving the frames (using a tick method in the while loop).
-# I couldn't do it at first because I didn't know about the 'partial' trick to pass parameteres.
+# If I were to refactor the vizualisation, I would animate on the first run without saving the frames
+# (using a tick method in the while loop). I couldn't do it at first because I didn't know about the
+# 'partial' trick to pass function parameteres.
