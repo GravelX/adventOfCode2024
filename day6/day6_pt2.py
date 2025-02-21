@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 #np.set_printoptions(threshold=sys.maxsize, linewidth=408)
 directory = os.path.dirname(os.path.realpath(__file__))
-input_file_path = os.path.join(directory, 'input.txt')
+input_file_path = os.path.join(directory, 'test_input.txt')
 
 debug = True
 
@@ -240,7 +240,7 @@ def detect_loops(grid, corners, start_pos):
 
     return loop_count, loops_data
 
-def vizualize(grid, data):
+def vizualize(grid, data, start_pos):
     # First, highlight the color of the obstacles
     grid[grid == -1] = 80
     # Then, highlight the color of the loops, using both opposite corners of the rectangles
@@ -253,6 +253,8 @@ def vizualize(grid, data):
         grid[corner1[0]:corner2[0]+1, corner2[1]] = color
         grid[corner1[0], corner1[1]:corner2[1]+1] = color
         grid[corner2[0], corner1[1]:corner2[1]+1] = color
+    # Highlight the starting position
+    grid[start_pos[0], start_pos[1]] = 20
     # Visualize the grid
     plt.imshow(grid, cmap='viridis')
     plt.show()
@@ -267,7 +269,7 @@ def main():
     # Calculate the number of possible loops
     loops, data = detect_loops(grid, corners, start_pos)
     # Visualize the grid with the loops
-    vizualize(grid, data)
+    vizualize(grid, data, start_pos)
     # Print the result
     print("Number of possible loops: ", loops)
 
